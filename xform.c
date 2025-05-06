@@ -243,7 +243,7 @@ computeDepth(NodeDepths *depths, SampleNode *nodes, u32 nodeId, u32 depth) {
 
 static CPUProfile
 parseCPUProfileJSON(Arena *arena, String jsonString) {
-    CPUProfile cpuprofile = { 
+    CPUProfile cpuprofile = {
         .startTime = -1.0f, .sampleCount = 0,
         .samples = NULL, .deltaCount = 0,
         .deltas = NULL, .sampleNodeCount = 0,
@@ -519,8 +519,8 @@ writeSpallBeginMarker(Writer *w, f64 timestamp, String fnName, String path, Stri
         blockName.size = snprintf(buffer, sizeof(buffer), "%.*s: %.*s", STRFMT(fnName), STRFMT(path));
     } else {
         blockName = fnName;
-        blockName.size = MIN(255, blockName.size);
     }
+    blockName.size = MIN(255, blockName.size);
 
     assert(blockName.size <= 255);
     writerWriteU8(w, blockName.size);
@@ -554,7 +554,7 @@ writeSpallOutput(CPUProfile *profile, Writer *w) {
     bool wasGC = false;
     String emptyString = LIT_TO_STR("");
     for(s32 i = 0; i < profile->sampleCount; i++) {
-        s32 nodeId = profile->samples[i]; 
+        s32 nodeId = profile->samples[i];
 
         bool isNodeGC = stringMatch(nodes[nodeId].funcName, LIT_TO_STR("(garbage collector)"));
         if(isNodeGC) {
