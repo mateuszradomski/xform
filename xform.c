@@ -610,7 +610,7 @@ writeSpallOutput(CPUProfile *profile, Writer *w) {
             previousNode = nodeId;
         }
 
-        currentTime += profile->deltas[i];
+        currentTime += MAX(0, profile->deltas[i]);
     }
 }
 
